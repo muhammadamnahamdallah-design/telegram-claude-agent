@@ -1,0 +1,15 @@
+services:
+  agent:
+    build: .
+    container_name: telegram-claude-agent
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      # Simpan sesi/memori Claude agar tidak hilang saat container restart
+      - claude-config:/home/agent/.claude
+      # Folder kerja agent (file hasil & upload)
+      - workspace:/app/workspace
+
+volumes:
+  claude-config:
+  workspace:
